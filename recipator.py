@@ -9,7 +9,11 @@ from cmath import e
 class Recipator:
     def __init__(self, filename="recipe1.conf"):
         self.parser = ConfigParser.RawConfigParser()
-        self.parser.read(filename)
+        try:
+            self.parser.read(filename)
+        except:
+            print "Recipe file is misconfigured!  See example recipe file for format details."
+            exit(1)
 
         self.general_sect = "General"
         self.grain_sect = "Grain Bill"
