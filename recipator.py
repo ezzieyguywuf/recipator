@@ -48,6 +48,10 @@ class Recipator:
         print self.hop_shop.draw()
 
     def parse_general(self):
+        if not self.parser.has_section(self.general_sect):
+            print "No general section!"
+            print "Recipe file is misconfigured!  See example recipe file for format details."
+            exit(1)
         self.brew_name = self.parser.get(self.general_sect, "Brew Name")
         self.batch_size = float(self.parser.get(self.general_sect, "Batch Size"))
         self.efficiency = float(self.parser.get(self.general_sect,
@@ -84,6 +88,10 @@ class Recipator:
                                    ["Total Gravity", total_gravity]])
 
     def parse_grains(self):
+        if not self.parser.has_section(self.grain_sect):
+            print "No grain section!"
+            print "Recipe file is misconfigured!  See example recipe file for format details."
+            exit(1)
         grains = self.parser.options(self.grain_sect)
         # will be [grain, weight (lb), weight (gm), mcu]
         grain_bill = []
@@ -119,6 +127,10 @@ class Recipator:
 
 
     def parse_hops(self):
+        if not self.parser.has_section(self.aroma_sect):
+            print "No aroma hop section!  (Even if it's empty, it's needed.)"
+            print "Recipe file is misconfigured!  See example recipe file for format details."
+            exit(1)
         hop_names = self.parser.options(self.aroma_sect)
         # will be [boil (min), hop name, AA%, weight (oz), weight (gm), util,
         # IBU contr.]
@@ -154,6 +166,10 @@ class Recipator:
         aroma_ibus  = sum([i[-1] for i in hops])
         aroma_ibus_tinseth = sum([i[-1] for i in hops_tinseth])
 
+        if not self.parser.has_section(self.bittering_sect):
+            print "No bittering hop section!  (Even if it's empty, it's needed.)"
+            print "Recipe file is misconfigured!  See example recipe file for format details."
+            exit(1)
         hop_names = self.parser.options(self.bittering_sect)
         needed_ibu = self.target_ibu - aroma_ibus
         needed_ibu_tinseth = self.target_ibu - aroma_ibus_tinseth
