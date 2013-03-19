@@ -1,0 +1,11 @@
+03/18/2013
+==========
+- Finish implimenting saintaardvark's better error handling
+    - Maybe use a custom exception, BadConfig for example, in order to
+      reduce code replication? See example commented under the general
+      section
+    - This will probably result in "less clean" errors: is that a bad
+      thing though?
+- Output to some sort of form, with room for brew-day notes and tasting notes
+- Specify units used
+- Make command-line options better: right now they are not very intuitive

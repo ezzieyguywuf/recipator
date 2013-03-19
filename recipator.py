@@ -52,6 +52,12 @@ class Recipator:
             print "No general section!"
             print "Recipe file is misconfigured!  See example recipe file for format details."
             exit(1)
+
+        # Example of raising a custom exception to reduce code
+        # duplication
+        #if not self.parser.has_section(self.general_sect):
+            #raise BadConfiguration
+
         self.brew_name = self.parser.get(self.general_sect, "Brew Name")
         self.batch_size = float(self.parser.get(self.general_sect, "Batch Size"))
         self.efficiency = float(self.parser.get(self.general_sect,
@@ -224,6 +230,9 @@ class Recipator:
             weight_gm = sum([i[4] for i in self.hops if i[1] == name])
             shopping_list.append([name, "{0:.1f}%".format(alpha), weight_oz, weight_gm])
         self.hop_shop.add_rows(shopping_list)
+
+class BadConfiguration(Exception):
+    pass
 
 if __name__=="__main__":
     import argparse
