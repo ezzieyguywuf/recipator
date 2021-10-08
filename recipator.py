@@ -8,7 +8,7 @@ from cmath import e
 
 class Recipator:
     def __init__(self, filename="recipe1.conf"):
-        self.parser = ConfigParser.RawConfigParser()
+        self.parser = configparser.RawConfigParser()
         try:
             self.parser.read(filename)
         except:
@@ -182,6 +182,7 @@ class Recipator:
 
         for hop in hop_names:
             hop_name, boil_time = [i.strip() for i in hop.split("-")]
+            boil_time = int(boil_time)
             # alpha acid % (by weight), utilization, % remaining IBUs
             vals = self.parser.get(self.bittering_sect, hop).split(",")
             vals = [float(i.strip()) for i in vals]
