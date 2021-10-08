@@ -1,4 +1,4 @@
-[!A CLI homebrew beer recipe creator](./recipator_screenshot.png)
+![A CLI homebrew beer recipe creator](./recipator_screenshot.png)
 
 This is a simple python recipe creator for homebrew beer. It was written  for
 python 2.7. It uses argparse to parse command-line arguments and texttable to
