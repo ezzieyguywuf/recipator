@@ -1,4 +1,4 @@
-import ConfigParser
+import configparser
 from texttable import Texttable
 from cmath import e
 
@@ -12,7 +12,7 @@ class Recipator:
         try:
             self.parser.read(filename)
         except:
-            print "Recipe file is misconfigured!  See example recipe file for format details."
+            print("Recipe file is misconfigured!  See example recipe file for format details.")
             exit(1)
 
         self.general_sect = "General"
@@ -37,20 +37,20 @@ class Recipator:
         self.hop_shop = Texttable()
 
     def print_recipe(self):
-        print self.general_table.draw()
-        print self.calc_table.draw()
-        print self.grain_table.draw()
-        print self.hop_table.draw()
-        #print self.hop_table_tinseth.draw()
+        print(self.general_table.draw())
+        print(self.calc_table.draw())
+        print(self.grain_table.draw())
+        print(self.hop_table.draw())
+        #print(self.hop_table_tinseth.draw())
 
     def print_shopping_list(self):
-        print self.grain_table.draw()
-        print self.hop_shop.draw()
+        print(self.grain_table.draw())
+        print(self.hop_shop.draw())
 
     def parse_general(self):
         if not self.parser.has_section(self.general_sect):
-            print "No general section!"
-            print "Recipe file is misconfigured!  See example recipe file for format details."
+            print("No general section!")
+            print("Recipe file is misconfigured!  See example recipe file for format details.")
             exit(1)
 
         # Example of raising a custom exception to reduce code
@@ -95,8 +95,8 @@ class Recipator:
 
     def parse_grains(self):
         if not self.parser.has_section(self.grain_sect):
-            print "No grain section!"
-            print "Recipe file is misconfigured!  See example recipe file for format details."
+            print("No grain section!")
+            print("Recipe file is misconfigured!  See example recipe file for format details.")
             exit(1)
         grains = self.parser.options(self.grain_sect)
         # will be [grain, weight (lb), weight (gm), mcu]
@@ -134,8 +134,8 @@ class Recipator:
 
     def parse_hops(self):
         if not self.parser.has_section(self.aroma_sect):
-            print "No aroma hop section!  (Even if it's empty, it's needed.)"
-            print "Recipe file is misconfigured!  See example recipe file for format details."
+            print("No aroma hop section!  (Even if it's empty, it's needed.)")
+            print("Recipe file is misconfigured!  See example recipe file for format details.")
             exit(1)
         hop_names = self.parser.options(self.aroma_sect)
         # will be [boil (min), hop name, AA%, weight (oz), weight (gm), util,
@@ -173,8 +173,8 @@ class Recipator:
         aroma_ibus_tinseth = sum([i[-1] for i in hops_tinseth])
 
         if not self.parser.has_section(self.bittering_sect):
-            print "No bittering hop section!  (Even if it's empty, it's needed.)"
-            print "Recipe file is misconfigured!  See example recipe file for format details."
+            print("No bittering hop section!  (Even if it's empty, it's needed.)")
+            print("Recipe file is misconfigured!  See example recipe file for format details.")
             exit(1)
         hop_names = self.parser.options(self.bittering_sect)
         needed_ibu = self.target_ibu - aroma_ibus
@@ -252,5 +252,5 @@ if __name__=="__main__":
     if not args.less or (not args.less and not args.shopping_list):
         myRecipator.print_recipe()
     if args.shopping_list:
-        print "printing shopping list"
+        print("printing shopping list")
         myRecipator.print_shopping_list()
